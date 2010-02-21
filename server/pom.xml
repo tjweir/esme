@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+ Licensed to the Apache Software Foundation (ASF) under one   *
+ or more contributor license agreements.  See the NOTICE file *
+ distributed with this work for additional information        *
+ regarding copyright ownership.  The ASF licenses this file   *
+ to you under the Apache License, Version 2.0 (the            *
+ "License"); you may not use this file except in compliance   *
+ with the License.  You may obtain a copy of the License at   *
+                                                              *
+   http://www.apache.org/licenses/LICENSE-2.0                 *
+                                                              *
+ Unless required by applicable law or agreed to in writing,   *
+ software distributed under the License is distributed on an  *
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY       *
+ KIND, either express or implied.  See the License for the    *
+ specific language governing permissions and limitations      *
+ under the License.                                           *
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.esme</groupId>
     <artifactId>esme-server</artifactId>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>apache-esme-1.0-incubating</version>
     <packaging>war</packaging>
-    <name>ESME</name>
+    <name>Apache Enterprise Social Messaging Experiment (ESME)</name>
     <inceptionYear>2008</inceptionYear>
+    <licenses>
+       <license>
+           <name>The Apache Software License, Version 2.0</name>
+           <url>LICENSE.txt</url>
+       </license>
+    </licenses>
+    <mailingLists>
+     <mailingList>
+      <name>ESME Dev List</name>
+      <subscribe>esme-dev-subscribe@incubator.apache.org</subscribe>
+      <unsubscribe>esme-dev-unsubscribe@incubator.apache.org</unsubscribe>
+      <post>esme-dev@incubator.apache.org</post>
+      <archive>http://mail-archives.apache.org/mod_mbox/incubator-esme-dev/</archive>
+    </mailingList>
+  </mailingLists>
     <properties>
-        <lift.version>1.1-SNAPSHOT</lift.version>
+        <lift.version>1.1-M8</lift.version>
         <scala.version>2.7.7</scala.version>
         <compass.version>2.1.1</compass.version>
         <lucene.version>2.4.0</lucene.version>
@@ -18,6 +51,11 @@
     </properties>
 
     <repositories>
+         <repository>
+               <id>Base</id>
+              <name>http://repo2.maven.org/maven2/</name>
+              <url>http://repo2.maven.org/maven2/</url>
+          </repository> 
         <repository>
             <id>scala-tools.org</id>
             <name>Scala-Tools Maven2 Repository</name>
@@ -39,22 +77,17 @@
             <name>Twitter Repo</name>
             <url>http://www.lag.net/nest</url>
         </repository>
-        <repository>
-            <id>configgy</id>
-            <name>Another Twitter Repo</name>
-            <url>http://www.lag.net/repo</url>
-        </repository>
-        <repository>
-            <id>opendmk</id>
-            <name>Java Dynamic Management Kit</name>
-            <url>http://maven.tigase.org/</url>    
-        </repository>                              
-		<repository>
-		  <id>Apache Repo</id>
-		  <name>Apache repository for Derby 10.5.1.1</name>
-		  <url>http://people.apache.org/repo/m1-ibiblio-rsync-repository</url>
-		  <layout>legacy</layout>
-		</repository>
+         <repository>
+               <id>Configgy</id>
+              <name>http://www.lag.net/repo</name>
+              <url>http://www.lag.net/repo</url>
+          </repository>
+          <repository>
+             <id>Apache Repo</id> 
+              <name>Apache repository for Derby 10.5.1.1</name> 
+              <url>http://people.apache.org/repo/m1-ibiblio-rsync-repository</url> 
+              <layout>legacy</layout> 
+            </repository>                  
     </repositories>
 
     <pluginRepositories>
@@ -78,11 +111,6 @@
                 <version>2.5</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>com.ibm.icu</groupId>
-                <artifactId>icu4j</artifactId>
-                <version>3.4.4</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -93,13 +121,7 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.ibm.icu</groupId>
-            <artifactId>icu4j</artifactId>
-            <version>3.4.4</version>
-        </dependency>
-        <dependency>
+       <dependency>
             <groupId>org.openid4java</groupId>
             <artifactId>openid4java</artifactId>
             <version>0.9.5</version>
@@ -136,18 +158,6 @@
             <version>${lift.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.liftweb</groupId>
-            <artifactId>lift-textile</artifactId>
-            <version>${lift.version}</version>
-        </dependency>
-        <!--
-      <dependency>
-        <groupId>com.socialmaterial</groupId>
-        <artifactId>social</artifactId>
-        <version>0.1-SNAPSHOT</version>
-      </dependency>
-      -->
-        <dependency>
             <groupId>org.compass-project</groupId>
             <artifactId>compass</artifactId>
             <version>${compass.version}</version>
@@ -156,19 +166,12 @@
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>8.2-507.jdbc3</version>
-        </dependency>   
+        </dependency> 
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>10.5.1.1</version>
         </dependency>       
-      <!--
-        <dependency>
-	        <groupId>com.h2database</groupId>
-	        <artifactId>h2</artifactId>
-	        <version>1.2.124</version>
-	    </dependency>
-	  -->  
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -182,30 +185,6 @@
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>2.1_3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.objenesis</groupId>
-            <artifactId>objenesis</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.jwebunit</groupId>
-            <artifactId>jwebunit-htmlunit-plugin</artifactId>
-            <version>1.4.1</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -225,18 +204,11 @@
             <artifactId>lucene-snowball</artifactId>
             <version>${lucene.version}</version>
         </dependency>
-        <!-- for stats gathering and jmx -->
         <dependency>
             <groupId>com.twitter</groupId>
             <artifactId>stats</artifactId>
             <version>${scala.stats.version}</version>
         </dependency>
-        <dependency>
-            <groupId>openDMK</groupId>
-            <artifactId>jdmkrt</artifactId>
-            <version>1.0-b02</version>
-        </dependency>
-        <!-- end stats and jmx -->
         <dependency>
             <groupId>org.scala-tools.testing</groupId>
             <artifactId>specs</artifactId>
@@ -256,7 +228,10 @@
         <testSourceDirectory>src/test/scala</testSourceDirectory>
 
         <plugins>
-
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
